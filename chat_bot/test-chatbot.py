@@ -3,21 +3,23 @@ import re
 
 # Definindo padrões para identificar diferentes intenções do usuário
 intent_patterns = {
-    r"\b(atualizar|alterar|mudar)\b.*\b(pagamento|cartão|forma de pagamento)\b": "atualizar_pagamento",
-    r"\b(acompanhar|rastrear|status|onde está)\b.*\b(pedido|entrega)\b": "acompanhar_pedido"
+    r"\b(como|quero|preciso|necessito)\b.\b(atualizar|mudar|alterar)\b.\b(informações de pagamento|cartão de crédito|forma de pagamento)\b": "atualizar_pagamento",
+    r"\b(onde|como|status|acompanhar|rastrear)\b.*\b(meu pedido|pedido|entrega)\b": "acompanhar_pedido"
 }
 
 # Respostas pré-definidas para cada intenção
 acoes = {
-    "atualizar_pagamento": lambda _: "Para atualizar suas informações de pagamento, acesse a seção de configurações de pagamento em sua conta.",
-    "acompanhar_pedido": lambda _: "Para acompanhar o status do seu pedido, acesse a seção 'Meus Pedidos' no nosso site ou use o link de rastreamento enviado ao seu e-mail."
+    "atualizar_pagamento": lambda: "Para atualizar suas informações de pagamento, acesse a seção de configurações de pagamento em sua conta.",
+    "acompanhar_pedido": lambda: "Para acompanhar o status do seu pedido, acesse a seção 'Meus Pedidos'."
 }
 
 def main():
+    print("Bem-vindo ao Atendimento Automatizado!")
     # Executando o loop para receber e processar comandos
     while True:
-        comando = input("Informe seu comando (digite 'sair' para finalizar): ")
+        comando = input("\nInforme seu comando (digite 'sair' para finalizar): ")
         if comando.lower() == 'sair':
+            print("Atendimento encerrado. Volte sempre!")
             break
 
         encontrado = False
@@ -29,9 +31,10 @@ def main():
                 break
 
         if not encontrado:
-            print("Desculpe, não consegui entender o comando.")
+            print("Desculpe, não consegui entender o comando. Tente reformular sua pergunta.")
 
-if __name__ == '_main_':
+if __name__ == '__main__':
     main()
+
 
 
